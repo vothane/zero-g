@@ -13,4 +13,12 @@ class ZeroGTest < Minitest::Test
     assert_instance_of Proc, lz.rest #seq must still be lazy
     assert_equal 3, lz.first.call
   end
+
+  def test_compose
+    inc = lambda {|x| x + 1}
+    sqr = lambda {|x| x * x}
+    str = lambda {|x| x.to_s }
+    cmp_fn = ZeroG.compose(str, sqr, inc)
+    assert_equal "4", cmp_fn.call(1)
+  end
 end
