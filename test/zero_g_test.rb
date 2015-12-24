@@ -21,4 +21,14 @@ class ZeroGTest < Minitest::Test
     cmp_fn = ZeroG.compose(str, sqr, inc)
     assert_equal "4", cmp_fn.call(1)
   end
+
+  def test_map
+    m = ZeroG.map(lambda {|x| x + 3}, [1, 2, 3])
+    assert_equal 4, m.first.call
+    m = m.rest.call
+    assert_equal 5, m.first.call
+    m = m.rest.call
+    assert_equal 6, m.first.call
+    m = m.rest.call
+  end
 end

@@ -9,5 +9,5 @@
 > to bring it all crashing down.
 
 Clojure like functional constructs (map, filter, take ...) using
-functional abstracts such as lazy evaluation, currying, composed
-functions, partials and currying.
+functional abstracts such as lazy evaluation, composed functions,
+partials and currying.

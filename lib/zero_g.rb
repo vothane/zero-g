@@ -26,7 +26,7 @@ module ZeroG
     # Unrealized & lazy recursive calls through partial method. When realized recursion
     # will not be used but instead by trampolining (emulating tail-recursion).
     lazy_seq.rest = lambda do
-      tail = self.partial(method(:lazy), rest_fn.call(coll), first_fn, rest_fn)
+      tail = partial(method(:lazy), rest_fn.call(coll), first_fn, rest_fn)
       return trampoline(tail)
     end
 
@@ -39,4 +39,16 @@ module ZeroG
       fns.inject(args_lambda) {|args, fn| fn.call(*args)}
     end
   end
+
+  def self.map(fn, seq)
+    if seq.instance_of?(Array)
+      first = lambda {|seq| seq.first}
+      rest = lambda {|seq| seq.drop(1)}
+    elsif seq.instance_of?(Hash)
+      first = lambda {|seq| nil}
+      rest = lambda {|seq| nil}
+    end
+    return lazy(seq, compose(fn, first), rest)
+  end
+
 end
