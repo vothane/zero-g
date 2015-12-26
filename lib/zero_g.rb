@@ -51,4 +51,14 @@ module ZeroG
     return lazy(seq, compose(fn, first), rest)
   end
 
+  def self.take(n, seq)
+    arr = []
+    while (seq && n > 0) do
+      arr << seq.first.call
+      seq = seq.rest.call
+      n -= 1
+    end
+    return arr
+  end
+
 end
