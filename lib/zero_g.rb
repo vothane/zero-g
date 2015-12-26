@@ -64,4 +64,8 @@ module ZeroG
     end
     return seq
   end
+
+  def self.slice(start, length, seq)
+    take(length, drop(start, seq))
+  end
 end
