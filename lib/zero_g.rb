@@ -57,4 +57,11 @@ module ZeroG
     return arr
   end
 
+  def self.drop(n, seq)
+    while n > 0 do
+      seq = seq.rest.call
+      n -= 1
+    end
+    return seq
+  end
 end

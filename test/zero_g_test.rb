@@ -37,4 +37,10 @@ class ZeroGTest < Minitest::Test
     m = ZeroG.map(sqr, [1, 2, 3, 4, 5, 6, 7, 8, 9])
     assert_equal [1, 4, 9, 16], ZeroG.take(4, m)
   end
+
+  def test_drop
+    sqr = lambda {|x| x * x}
+    m = ZeroG.map(sqr, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    assert_equal [36, 49, 64, 81], ZeroG.take(4, ZeroG.drop(5, m))
+  end
 end
