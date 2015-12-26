@@ -1,4 +1,5 @@
 require "zero_g/version"
+require "zero_g/monkey_spankr"
 require "ostruct"
 
 module ZeroG
@@ -41,13 +42,8 @@ module ZeroG
   end
 
   def self.map(fn, seq)
-    if seq.instance_of?(Array)
-      first = lambda {|seq| seq.first}
-      rest = lambda {|seq| seq.drop(1)}
-    elsif seq.instance_of?(Hash)
-      first = lambda {|seq| nil}
-      rest = lambda {|seq| nil}
-    end
+    first = seq.get_first_fn
+    rest = seq.get_rest_fn
     return lazy(seq, compose(fn, first), rest)
   end
 
